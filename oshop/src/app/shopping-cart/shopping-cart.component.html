@@ -1,0 +1,32 @@
+<h1>Kosár</h1>
+<p>
+    {{this.cartService.quantity}} termék van a kosaradban.
+    <button *ngIf="this.cartService.cart.length>0" (click)="clearCart()" class="btn btn-light btn-sm">Kosár törlése</button>
+</p>
+<table class="table" style="width: 70%;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Termék</th>
+            <th class="text-center" style="width: 200px">Darab</th>
+            <th class="text-right" style="width: 200px;">Összérték</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of this.cartService.cart">
+            <td><div [style.backgroundImage]="'url('+product['product']['imageUrl']+')'" class="thumbnail"></div></td>
+            <td>{{product["product"]["title"]}}</td>
+            <td><app-product-card [only-actions]="true" [shopping-cart]="this.cart" [product]="product['product']"></app-product-card></td>
+            <td class="text-right">{{product["price"]}} Forint</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th class="text-right">{{this.cartService.totalPrice}} Forint</th>
+        </tr>
+    </tfoot>
+</table>
+<a routerLink="/check-out" *ngIf="this.cartService.cart.length>0" class="btn btn-primary">Fizetés</a>

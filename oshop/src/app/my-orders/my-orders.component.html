@@ -1,0 +1,9 @@
+<h1>Rendeléseim</h1>
+<div class="row">
+    <ng-container *ngFor="let p of this.orders;let i =index">
+        <div class="col" >
+            <app-order-details [order]="p" ></app-order-details>
+        </div>
+        <div *ngIf="(i+1)%2 === 0" class="w-100"></div>
+    </ng-container>
+</div>

@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+      <h3 class="card-title">
+        <div class="row" style="font-weight: bold;">
+            <div class="col">{{this.order["shipping"]["name"]}}</div>
+            <div class="col">{{this.order["datePlaced"] | date}}</div>
+        </div>
+      </h3>
+      <div class="card-text">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let product of this.order['items']">
+                <div class="row">
+                    <div class="col">
+                        {{product["quantity"]}} x
+                        {{product["product"]["title"]}}
+                    </div>
+                    <div class="col text-right">{{product["totalPrice"]}} Forint</div>
+                </div>
+            </li>
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col" style="font-weight: bold;">Összegzés</div>
+                    <div class="col text-right" style="font-weight: bold;">{{this.order["price"]}} Forint</div>
+                </div>
+            </li>
+        </ul>
+     </div>
+    </div>
+  </div>

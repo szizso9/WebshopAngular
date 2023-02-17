@@ -1,0 +1,37 @@
+
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/">
+        <i class="bi bi-shop"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarsExample03">
+        <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="shopping-cart">
+              <i class="bi bi-cart-fill"></i>
+              <span class="badge badge-warning badge-pill">{{cartQuantity}}</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mb-2 mb-sm-0">
+          <ng-template #anonym>
+            <li class="nav-item" >
+              <a class="nav-link" (click)="login()">Bejelentkezés</a>
+            </li>
+          </ng-template>
+          <li *ngIf="this.appUser; else anonym" class="nav-item dropdown" ngbDropdown >
+            <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">{{this.appUser.name}}</a>
+            <ul ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+              <li><a class="dropdown-item" routerLink="my/orders">Rendeléseim</a></li>
+              <li *ngIf="this.appUser.isAdmin"><a class="dropdown-item" routerLink="admin/products">Termékek szerkesztése</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Kilépés</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+

@@ -1,0 +1,23 @@
+<div class="card" style="width: 60%;">
+    <div class="card-body">
+      <h3 class="card-title" style="font-weight: bold;">Rendelés összegzés</h3>
+      <p class="card-text">{{this.cartService.quantity}} termék a kosárban</p>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let product of this.cartService.cart">
+            <div class="row">
+                <div class="col">
+                    {{product["quantity"]}} x
+                    {{product["product"]["title"]}}
+                </div>
+                <div class="col text-right">{{product["price"]}} Forint</div>
+            </div>
+        </li>
+        <li class="list-group-item">
+            <div class="row">
+                <div class="col" style="font-weight: bold;">Összegzés</div>
+                <div class="col text-right" style="font-weight: bold;">{{this.cartService.totalPrice}} Forint</div>
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>

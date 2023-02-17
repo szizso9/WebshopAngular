@@ -1,0 +1,27 @@
+
+<p>
+    <button routerLink="/admin/products/new" class="btn btn-primary">Új termék</button>
+</p>
+
+<p>
+    <input type="text" class="form-control" placeholder="Keresés" (keyup)="filter(query.value)" #query>
+</p>
+
+<table mat-table class="table">
+    <thead>
+        <tr>
+            <th>Cím</th>
+            <th>Ár</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of this.filteredProducts">
+            <td>{{p.value.title}}</td>
+            <td>{{p.value.price}}</td>
+            <td>
+                <a [routerLink]="['/admin/products/',p.key]">Szerkesztés</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

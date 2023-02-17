@@ -1,0 +1,21 @@
+.card{
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.card-footer
+{
+    padding: 0;
+    text-align: center;
+    
+}
+
+button{
+    width: 100%;
+}
+
+
+.card-footer button{
+    cursor: pointer;
+}
+

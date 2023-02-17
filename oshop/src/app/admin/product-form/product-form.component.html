@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-md-6">
+        <form (ngSubmit)="save(f.value)" #f="ngForm">
+            <div class="form-group">
+                <label for="title">
+                    Cím
+                </label>
+                <input #title="ngModel" [(ngModel)]="this.product.title" name="title" id="title" type="text" class="form-control" required="true">
+                <div *ngIf="title.touched && title.invalid" class="alert alert-danger">
+                    Cím megadása kötelező!
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="price">
+                    Ár
+                </label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">HUF</span>
+                    </div>
+                        <input min="0" #price="ngModel" required="true" [(ngModel)]="this.product.price" name="price" id="price" type="number" class="form-control">
+                </div>
+                <div *ngIf="price.touched && price.invalid" class="alert alert-danger">
+                    <div *ngIf="price.errors['min']">
+                        Az árnak pozitív számnak kell lennie!
+                    </div>
+                    <div *ngIf="price.errors['required']">
+                        Ár megadása kötelező!
+                    </div>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="category">
+                    Kategória
+                </label>
+                <select required="true" #category="ngModel" [(ngModel)]="this.product.category" name="category" id="category" type="number" class="form-control">
+                    <option value=""></option>
+                    <option *ngFor="let cat of this.categories|async" [value]="cat.id"> {{ cat.name}}
+                    </option>
+                </select>
+                <div *ngIf="category.touched && category.invalid" class="alert alert-danger">
+                    Kategória megadása kötelező!
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <label for="imageUrl">
+                    Kép URL
+                </label>
+                <input pattern="^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$" #imageUrl="ngModel" required="true" [(ngModel)]="this.product.imageUrl" name="imageUrl" id="imageUrl" type="text" class="form-control">
+                <div *ngIf="imageUrl.touched&&imageUrl.invalid" class="alert alert-danger">
+                    <div *ngIf="imageUrl.errors['pattern']">
+                        Nem megfelelő URL!
+                    </div>
+                    <div *ngIf="imageUrl.errors['required']">
+                        Kép URL megadása kötelező!
+                    </div>
+                </div>
+            </div>
+        
+            <button [ngClass]="{'disabled': f.invalid}" class="btn btn-primary">Mentés</button>
+            <button type="button" class="btn btn-danger" (click)="delete()">Törlés</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <app-product-card [product]="this.product" [show-actions]="false"></app-product-card>
+    </div>
+</div>
+

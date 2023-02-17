@@ -1,0 +1,54 @@
+<div *ngIf="!this.onlyActions; else actions">
+  <div *ngIf="this.product.title" class="card" style="width: 25rem;">
+    <img class="card-img-top" [src]="this.product.imageUrl" [alt]="this.product.title" *ngIf="this.product.imageUrl">
+    <div class="card-body">
+      <h2 class="card-title">{{this.product.title}}</h2>
+      <p class="card-text">{{this.product.price}} Forint</p>
+    </div>
+    <div class="card-footer" *ngIf="showActions">
+        <div *ngIf="getQuantity(this.product) === 0; else updateQuantity">
+          <button  (click)="addToCart(this.product)" class="btn btn-secondary btn-block"><i class="bi bi-cart-fill"></i></button>
+        </div>
+       <ng-template #updateQuantity class="container">
+        <div class="row">
+          <div class="col">
+            <button (click)="removeCart(this.product)" class="btn btn-secondary btn-block">
+              <i class="bi bi-dash"></i>
+            </button>
+          </div>
+          <div class="col-5">
+            <div>
+              {{getQuantity(this.product)}} kosárban
+           </div>
+          </div>
+          <div class="col">
+            <button class="btn btn-secondary btn-block" (click)="addToCart(this.product)">
+              <i class="bi bi-plus"></i>
+            </button>
+           </div>
+        </div>
+       </ng-template>
+    </div>
+  </div>
+</div>
+
+
+  <ng-template #actions class="card-footer">
+    <div class="row">
+      <div class="col-4">
+        <button (click)="removeCart(this.product)" class="btn btn-secondary btn-block">
+          <i class="bi bi-dash"></i>
+        </button>
+      </div>
+      <div class="col-sm text-center">
+        <div>
+          {{getQuantity(this.product)}}
+       </div>
+      </div>
+      <div class="col-4">
+        <button class="btn btn-secondary btn-block" (click)="addToCart(this.product)">
+          <i class="bi bi-plus"></i>
+        </button>
+      </div>
+    </div>
+   </ng-template>
